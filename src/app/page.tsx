@@ -20,7 +20,7 @@ export default function Home() {
     Result | { isAppropriate: boolean; reason: string } | null
   >(null);
 
-  const { mutate, isError, isPending } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: moderatePostAn,
     onSuccess: (data) => {
       // Handle the data returned here
