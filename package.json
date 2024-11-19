@@ -1,5 +1,5 @@
 {
-  "name": "artist-contract-proto",
+  "name": "badrobot-ai",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -18,8 +18,8 @@
     "lucide-react": "^0.460.0",
     "next": "15.0.2",
     "openai": "^4.71.1",
-    "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
   },
