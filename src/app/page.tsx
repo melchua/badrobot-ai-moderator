@@ -1,12 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { moderatePostAn } from "./api/actions";
 import Image from "next/image";
 import { Disc3 } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+
+const CHAR_LIMIT = 280;
 
 interface Result {
   isAppropriate: boolean;
@@ -38,38 +40,48 @@ export default function Home() {
     mutate({ post: post });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPost(e.target.value);
   };
 
   return (
-    <div className="mt-12 flex flex-col h-screen relative">
-      <div className="text-5xl items-center justify-center font-extrabold p-10">
+    <div className="mt-12 sm:mt-20 flex flex-col h-screen relative">
+      <div className="flex text-5xl mb-6 items-center justify-center font-extrabold">
         <div>
-          <Image
-            src="/badrobot.png"
-            width={100}
-            height={100}
-            alt="badrobot.png"
-            className="absolute top-1 -left-7"
-          />
-        </div>
-
-        <div>
-          <div className="mb-5">Tell me if this is appropriate...</div>
-
-          <div className="flex items-center flex-row gap-2">
-            <Input
-              placeholder="Enter potentially inappropriate post here..."
-              value={post}
-              onChange={handleChange}
+          <div className="flex flex-row items-center">
+            <Image
+              src="/badrobot.png"
+              width={100}
+              height={100}
+              alt="badrobot.png"
             />
+            <span>So... is this appropriate?</span>
+          </div>
+          <div className="w-full grid gap-2">
+            <span className="flex flex-col w-full">
+              <div className="text-xs font-light flex self-end">
+                <span
+                  className={`${
+                    post.length > CHAR_LIMIT ? "text-red-600 font-semibold" : ""
+                  } mr-2`}
+                >
+                  {post.length} of {CHAR_LIMIT}
+                </span>
+              </div>
+              <Textarea
+                placeholder="Enter potentially inappropriate post here..."
+                value={post}
+                onChange={handleChange}
+                style={{ resize: "none" }}
+                rows={4}
+              />
+            </span>
 
             <Button
               variant="default"
               className="text-white bg-black hover:bg-slate-600"
               onClick={onCheck}
-              disabled={isPending}
+              disabled={isPending || post.length > CHAR_LIMIT}
             >
               {isPending ? <Disc3 className="animate-spin" /> : null}
               Check
@@ -79,12 +91,16 @@ export default function Home() {
       </div>
 
       {!isPending && result ? (
-        <div className="flex flex-col mx-12">
+        <div className="flex flex-col border-2 border-dashed p-4">
           <div>
-            <div className="uppercase font-semibold text-2xl">
+            <div className="font-semibold text-2xl">
               {result?.isAppropriate ? "✅ Appropriate!" : "🙅🏻‍♀️ Inappropriate!"}
             </div>
-            <div className="italic text-red-600 line-through">
+            <div
+              className={`italic ${
+                !result?.isAppropriate ? "text-red-600 line-through" : ""
+              }`}
+            >
               &quot;{prevPost}&quot;
             </div>
           </div>
