@@ -1,13 +1,13 @@
 // app/api/runScript/route.js
-import { moderatePost } from "../../ai/moderateAi";
+import { moderatePost } from "../../../services/ai/moderateAi"
 
 export async function POST(req) {
-  console.log("Moderating post...");
+  console.log("Moderating post...")
 
-  const input = await req.json();
+  const input = await req.json()
 
   return new Promise(async (resolve) => {
-    const result = await moderatePost(input);
-    resolve(new Response(JSON.stringify({ result }), { status: 200 }));
-  });
+    const result = await moderatePost(input)
+    resolve(new Response(JSON.stringify({ result }), { status: 200 }))
+  })
 }
