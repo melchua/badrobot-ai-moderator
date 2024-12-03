@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 }
 
 const links = [
-  { url: '/', label: 'Main' },
-  { url: '/docs', label: 'API Docs' },
+  { url: '/', label: 'Main', id: 0 },
+  { url: '/docs', label: 'API Docs', id: 1 },
 ]
 
 export default function RootLayout({
@@ -45,7 +45,7 @@ export default function RootLayout({
             <ul className="flex gap-2 justify-center">
               {links.map((link) => {
                 return (
-                  <li>
+                  <li key={link.id}>
                     <Link href={link.url}>{link.label}</Link>
                   </li>
                 )
