@@ -6,7 +6,9 @@
 
 <h4 align="center">A minimal moderation API used to detect inappropriate comments in posts.</h4>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/f14110d9-c0a8-49ee-934b-397a758717c7" width="400" />
+</div>
 
 ## Key Features
 
